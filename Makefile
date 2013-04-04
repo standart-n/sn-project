@@ -34,14 +34,21 @@ layout:
 
 js:
 	@coffee -cbjvp ./client/sn/sn*.coffee > ./public/js/client/sn.js
-	@uglifyjs ./public/js/client/sn.js -nc > ./public/js/client/sn.min.js
+	@uglifyjs ./public/js/client/sn.js -nc > ./public/js/client/sn.min.js --config ./.jshintrc
+
 	@coffee -cbjvp ./script/main*.coffee > ./public/js/client/main.js
-	@uglifyjs ./public/js/client/main.js -nc > ./public/js/client/main.min.js
+	@uglifyjs ./public/js/client/main.js -nc > ./public/js/client/main.min.js --config ./.jshintrc
+
+	@coffee -cbjvp ./script/ie6*.coffee > ./public/js/client/ie6.js
+	@uglifyjs ./public/js/client/ie6.js -nc > ./public/js/client/ie6.min.js --config ./.jshintrc
 
 
 css:
 	@recess --compile ./less/index.less > ./public/css/style.css
 	@recess --compress ./less/index.less > ./public/css/style.min.css
+
+	@recess --compile ./less/ie6.less > ./public/css/ie6.css
+	@recess --compress ./less/ie6.less > ./public/css/ie6.min.css
 
 	@recess --compile ./less/ie7.less > ./public/css/ie7.css
 	@recess --compress ./less/ie7.less > ./public/css/ie7.min.css

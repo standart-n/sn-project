@@ -6,7 +6,8 @@
 		"main": "/public/js/client/main.min.js",
 		"jquery": "lib/js/jQuery.1.8.3.min.js",
 		"sn": "/public/js/client/sn.min.js",
-		"bootstrap": "/public/js/client/bootstrap.min.js"
+		"bootstrap": "/public/js/client/bootstrap.min.js",
+		"ie6": "/public/js/client/ie6.min.js"
 	},
 	"main":"main",
 	"global":"this",

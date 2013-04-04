@@ -16,6 +16,10 @@ html
 		link(href = "favicon.ico", rel = "icon", type = "image/x-icon")
 		link(href = "favicon.ico", rel = "shortcut icon", type = "image/x-icon")
 		link(href = "public/css/style.min.css", rel = "stylesheet", type = "text/css")
+		//[if IE 6]
+			link(href = "public/css/ie6.min.css", rel = "stylesheet", type = "text/css")
+		//[if IE 7]
+			link(href = "public/css/ie7.min.css", rel = "stylesheet", type = "text/css")
 		//[if lt IE 9]
 			script(src = "http://html5shim.googlecode.com/svn/trunk/html5.js")
 	body
