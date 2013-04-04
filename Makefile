@@ -10,17 +10,11 @@ HR=\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\
 
 def: all
 
-all: folders client server finish
+all: client server finish
 
-client: js css layout indexhtml
+client: css layout indexhtml js lmd
 
 server: node-app node-controls node-routes
-
-js: client-js main-js lmd
-
-css: client-css all-css
-
-bootstrap: bs-img bs-css bs-js
 
 folders: folders-public folders-tpl
 
@@ -38,28 +32,23 @@ layout:
 	@touch ./tpl/templates/.gitignore
 	@jade --pretty ./layout/${TPL}/ -O ./tpl/templates
 
-client-js:
-	@coffee -cbjvp ./client/sn*.coffee > ./public/js/client/sn.js
+js:
+	@coffee -cbjvp ./client/sn/sn*.coffee > ./public/js/client/sn.js
 	@uglifyjs ./public/js/client/sn.js -nc > ./public/js/client/sn.min.js
-
-main-js:
 	@coffee -cbjvp ./script/main*.coffee > ./public/js/client/main.js
 	@uglifyjs ./public/js/client/main.js -nc > ./public/js/client/main.min.js
 
 
-
-client-css:
-	@recess --compile ./less/sn.less > ./public/css/sn.css
-	@recess --compress ./less/sn.less > ./public/css/sn.min.css
-
-all-css:
+css:
+	@recess --compile ./less/index.less > ./public/css/style.css
+	@recess --compress ./less/index.less > ./public/css/style.min.css
 	@cat ./public/css/*.min.css > ./public/assets/style.css
 
 
 
 node-app:
 	@echo "\n app... \n"
-	@coffee -cbjvp ./script/app*.coffee > ./app
+	@coffee -cbjvp ./script/index*.coffee > ./index.js
 
 node-controls:
 	@echo "\n controls... \n"
@@ -76,12 +65,12 @@ node-routes:
 
 
 start:
-	@echo "forever start -o ./log/out.log -e ./log/err.log app"
-	@forever start -o ./log/out.log -e ./log/err.log app
+	@echo "forever start -o ./log/out.log -e ./log/err.log index.js"
+	@forever start -o ./log/out.log -e ./log/err.log index.js
 
 stop:
-	@echo "stop app"
-	@forever stop app
+	@echo "stop index.js"
+	@forever stop index.js
 
 
 folders-tpl:
@@ -105,24 +94,13 @@ finish:
 	@echo "\nSuccessfully built at ${DATE}."
 
 
-
-
-bs-img:
-	@cp ./bootstrap/img/* ./public/img/
-
-bs-css:
-	@recess --compile ./bootstrap/less/bootstrap.less > ./public/css/bootstrap.css
-	@recess --compress ./bootstrap/less/bootstrap.less > ./public/css/bootstrap.min.css
-	@recess --compile ./bootstrap/less/responsive.less > ./public/css/bootstrap-responsive.css
-	@recess --compress ./bootstrap/less/responsive.less > ./public/css/bootstrap-responsive.min.css
-
-bs-js:
-	@cat ./bootstrap/js/bootstrap-*.js  > ./public/js/client/bootstrap.js
+bootstrap:
+	@cat ./client/bootstrap/bootstrap-*.js  > ./public/js/client/bootstrap.js
 	@uglifyjs ./public/js/client/bootstrap.js -nc > ./public/js/client/bootstrap.min.tmp.js
 
-	@echo "/**\n* bootstrap.js v2.2.2 by @fat & @mdo\n* Copyright 2012 Twitter, Inc.\n* http://www.apache.org/licenses/LICENSE-2.0.txt\n*/" > ./bootstrap/copyright
-	@cat ./bootstrap/copyright ./public/js/client/bootstrap.min.tmp.js > ./public/js/client/bootstrap.min.js
-	@rm ./bootstrap/copyright ./public/js/client/bootstrap.min.tmp.js
+	@echo "/**\n* bootstrap.js v2.2.2 by @fat & @mdo\n* Copyright 2012 Twitter, Inc.\n* http://www.apache.org/licenses/LICENSE-2.0.txt\n*/" > ./copyright
+	@cat ./copyright ./public/js/client/bootstrap.min.tmp.js > ./public/js/client/bootstrap.min.js
+	@rm ./copyright ./public/js/client/bootstrap.min.tmp.js
 
 
 
