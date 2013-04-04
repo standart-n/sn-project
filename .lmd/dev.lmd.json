@@ -1,7 +1,7 @@
 {
 	"name": "dev build",
 	"root": "../",
-	"output": "/public/assets/client.js",
+	"output": "/public/js/client/lmd.js",
 	"modules": {
 		"main": "/public/js/client/main.min.js",
 		"jquery": "lib/js/jQuery.1.8.3.min.js",

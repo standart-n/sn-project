@@ -42,8 +42,9 @@ js:
 css:
 	@recess --compile ./less/index.less > ./public/css/style.css
 	@recess --compress ./less/index.less > ./public/css/style.min.css
-	@cat ./public/css/*.min.css > ./public/assets/style.css
 
+	@recess --compile ./less/ie7.less > ./public/css/ie7.css
+	@recess --compress ./less/ie7.less > ./public/css/ie7.min.css
 
 
 node-app:
