@@ -16,8 +16,6 @@ client: css layout indexhtml js lmd
 
 server: node-app node-controls node-routes
 
-folders: folders-public folders-tpl
-
 indexhtml:
 	@rm -f ./index.html
 	@jade --pretty ./layout/${TPL}/index.jade -O ./
@@ -80,23 +78,6 @@ stop:
 	@echo "stop index.js"
 	@forever stop index.js
 
-
-folders-tpl:
-	@mkdir -p ./tpl/cache
-	@mkdir -p ./tpl/configs
-	@mkdir -p ./tpl/templates
-	@mkdir -p ./tpl/templates_c
-
-folders-public:
-	@mkdir -p ./public/assets
-	@mkdir -p ./public/img
-	@mkdir -p ./public/css
-	@mkdir -p ./public/materials
-	@mkdir -p ./public/files
-	@mkdir -p ./public/js/client
-	@mkdir -p ./public/js/controls
-	@mkdir -p ./public/js/routes
-	@mkdir -p ./public/js/tpl
 	
 finish:
 	@echo "\nSuccessfully built at ${DATE}."
