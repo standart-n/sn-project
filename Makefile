@@ -1,7 +1,7 @@
-TPL=smarty
-DATE=$(shell date +%I:%M%p)
-CHECK=\033[32m✔\033[39m
-HR=\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
+TPL = smarty
+DATE = $(shell date +%I:%M%p)
+CHECK = \033[32m✔\033[39m
+HR = \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
 
 
 #
@@ -12,7 +12,7 @@ def: all
 
 all: client server finish
 
-client: css layout indexhtml js lmd
+client: css templates indexhtml js lmd
 
 server: node-app node-controls node-routes
 
@@ -24,14 +24,12 @@ lmd:
 	@echo "\n lmd... \n"
 	@lmd build dev
 
-layout:
-	@rm -R ./tpl/templates/
-	@mkdir -p ./tpl/templates/
-	@touch ./tpl/templates/.gitignore
-	@jade --pretty ./layout/${TPL}/ -O ./tpl/templates
+templates:
+	@jade --pretty ./layout/${TPL}/* -O ./tpl/templates/
+
 
 js:
-	@coffee -cbjvp ./client/sn/sn*.coffee > ./public/js/client/sn.js
+	@coffee -cbjvp ./client/sn/* > ./public/js/client/sn.js
 	@uglifyjs ./public/js/client/sn.js -nc > ./public/js/client/sn.min.js --config ./.jshintrc
 
 	@coffee -cbjvp ./script/main*.coffee > ./public/js/client/main.js
@@ -97,4 +95,4 @@ bootstrap:
 # RUN JSHINT & QUNIT TESTS IN PHANTOMJS
 #
 
-#.PHONY: docs watch gh-pages
+.PHONY: clean

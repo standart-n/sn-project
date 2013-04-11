@@ -1,57 +1,43 @@
 <?php class project extends sn {
 
+public static $tm;
+public static $error;
+public static $line_ms;
+
 function __construct() {
 	session_start();
 }
 
 public static function engine() {
-	//if (signin::check()) {
-		load("index.html");
-		// assign('pagination',app::pagination());
-		// assign('prev',app::$prev);
-		// assign('next',app::$next);
-		// assign('page',app::$page);
-		// innerHTML("#pagination",fetch("pagination.html"));
-		// assign('claims',app::claims());
-		// innerHTML("#claims",fetch("claims.html"));
-		//echo sql::$request;
-		echo html();
-	// } else {
-	// 	load("index.html");
-	// 	innerHTML("#signin",fetch("signin.html"));
-	// 	//echo sql::$request;
-	// 	echo html();
-	// }
-}	
 
-public static function signin($j=array()) {
-	if (signin::check()) {
-		$j['response']=true;
-		//$j['key']=signin::$key;
-		// assign('pagination',app::pagination());
-		// assign('prev',app::$prev);
-		// assign('next',app::$next);
-		// assign('page',app::$page);
-		// $j['pagination']=fetch("pagination.html");
-		// assign('claims',app::claims());
-		// $j['claims']=fetch("claims.html");
-	} else {
-		$j['response']=false;
+	require_once(project."/controls/signin/signin.php");
+	sn::cl("signin");
+
+	switch(url::$action) {
+		case "registration":
+			require_once(project."/controls/registration/registration.php");
+			sn::cl("registration");
+			return self::registration();
+		break;
 	}
-	$j['callback']="afterSignin";
+	return false;
+}
+
+public static function registration($j=array()) {
+	$j['registration']=registration::engine();
+	$j['tm']=time();
 	return $j;
 }
 
-public static function edit($j=array()) {
-	if (signin::check()) {
-		app::edit();
-		//claims::getDataFromUrl();
-		//$j['alert']=sql::$request;
-		$j['response']=true;
-	} else {
-		$j['response']=false;
+
+public static function gentm() {
+	if (query(sql::gentm())) {
+		self::$tm=mysql_insert_id();
+		if (self::$tm>0) {
+			return true;
+		}
 	}
-	return $j;
+	return false;
 }
 
 } ?>

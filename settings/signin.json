@@ -1,5 +1,10 @@
-{	
-	"name":"admin",
-	"login":"root",
-	"password":"f80e2a830a93e96e5400cc452b93d2d87b1ef745"
+{
+	"users":
+	[
+		{
+			"name":"Лёха",
+			"login":"aleksnick",
+			"password":"e9b14f010c91507ddbdd32bd28911ba8a9f3d30f"
+		}
+	]
 }

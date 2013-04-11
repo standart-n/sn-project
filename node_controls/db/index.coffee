@@ -14,8 +14,11 @@ exports.opendb = (callback) ->
 			if (err)
 				console.log 'firebird:'.error, err.message.data
 			else
-				console.log 'firebird:'.info, 'connected to base'.data
-				callback(db)
+				console.log 'firebird:'.info, 'connected to database'.data
+				callback(db) if callback
+
+exports.disconnect = (db) ->
+	db.detach()
 
 exports.query = (sql, db, callback) ->
 	colors = global.controls.lib.colors.init()
@@ -23,7 +26,7 @@ exports.query = (sql, db, callback) ->
 		if err 
 			console.log 'firebird:'.error, err.message.data
 		else 
-			callback(result)
+			callback(result) if callback
 
 exports.checkError = (err) ->
 	colors = global.controls.lib.colors.init()
@@ -33,7 +36,7 @@ exports.check = (tr, callback) ->
 	colors = global.controls.lib.colors.init()
 	(err, param) ->
 		if (!err)
-			callback err, param
+			callback err, param if callback
 		else
 			tr.rollback()
 			console.log 'firebird:'.error, err.message.data

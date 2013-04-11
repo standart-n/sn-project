@@ -37,6 +37,4 @@ node_modules
 dist
 conf
 log
-templates_c
-cache
 materials

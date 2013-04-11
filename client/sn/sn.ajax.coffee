@@ -38,6 +38,7 @@ $ ->
 						sn.result=s
 					$(@).data('sn',sn)
 					if typeof sn.result=='object'
+						alert sn.result.callback
 						alert sn.result.alert if sn.result.alert
 						$(@).snEvents href:'#'+sn.result.callback if sn.result.callback
 					$("#loading").hide()

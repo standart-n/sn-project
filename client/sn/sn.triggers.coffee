@@ -15,37 +15,42 @@ $ ->
 		table: ->
 			th=$(this)
 			$(".status").on "keyup",() ->
-				th.snAjax 'sendRequest',
-						action:'edit'
-						id:$(this).data 'id'
-						message:$(this).val()
-						debug:false
+				th.snAjax 'sendRequest',(
+					action:'edit'
+					id:$(this).data 'id'
+					message:$(this).val()
+					debug:false
+				)
 			$(".status").on "blur",() ->
-				th.snAjax 'sendRequest',
-						action:'edit'
-						id:$(this).data 'id'
-						message:$(this).val()
-						debug:false
+				th.snAjax 'sendRequest',(
+					action:'edit'
+					id:$(this).data 'id'
+					message:$(this).val()
+					debug:false
+				)
 		pagination: ->
 			th=$(this)
 			$("a#prev").on "click",(e) ->
 				e.preventDefault()
 				$("#page").val $("#page").val()*1-1
-				th.snAjax 'sendRequest'
-						action:'signin'
-						debug:false
+				th.snAjax 'sendRequest',(
+					action:'signin'
+					debug:false
+				)
 			$("a.list").on "click",(e) ->
 				e.preventDefault()
 				$("#page").val $(this).data "page"
-				th.snAjax 'sendRequest'
-						action:'signin'
-						debug:false
+				th.snAjax 'sendRequest',(
+					action:'signin'
+					debug:false
+				)
 			$("a#next").on "click",(e) ->
 				e.preventDefault()
 				$("#page").val $("#page").val()*1+1
-				th.snAjax 'sendRequest'
-						action:'signin'
-						debug:false
+				th.snAjax 'sendRequest',(					
+					action:'signin'
+					debug:false
+				)
 
 	$.fn.snTriggers= (sn) ->
 		sn={} if !sn
