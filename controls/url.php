@@ -1,9 +1,12 @@
-<?php class url extends sn {
+<?php class url {
 	
 public static $action;
 public static $callback;
 
 function __construct() {
+
+	self::$action="index";
+
 	if (isset($_REQUEST["action"])) {
 		self::$action=trim(strval($_REQUEST["action"]));
 	}

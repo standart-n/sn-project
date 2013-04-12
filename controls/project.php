@@ -19,6 +19,8 @@ public static function engine() {
 			sn::cl("registration");
 			return self::registration();
 		break;
+		default:
+			//load('index.html');
 	}
 	return false;
 }
