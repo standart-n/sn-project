@@ -12,13 +12,9 @@ def: all
 
 all: client server finish
 
-client: css templates indexhtml js lmd
+client: css templates js lmd
 
 server: node-app node-controls node-routes
-
-indexhtml:
-	@rm -f ./index.html
-	@jade --pretty ./layout/${TPL}/index.jade -O ./
 
 lmd:
 	@echo "\n lmd... \n"

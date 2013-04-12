@@ -37,6 +37,7 @@ node_modules
 dist
 conf
 log
+yii
 materials
 framework
 demos
