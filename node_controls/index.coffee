@@ -1,6 +1,5 @@
 
 exports.lib = require './lib'
-exports.client = require './client'
-exports.parser = require './parser'
-exports.db = require './db'
-exports.sql = require './sql'
+# exports.client = require './client'
+# exports.db = require './fdb'
+# exports.sql = require './sql'

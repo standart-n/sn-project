@@ -10,9 +10,9 @@ HR = \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\
 
 def: all
 
-all: client server finish
+all: client finish
 
-client: css templates js lmd
+client: css js lmd
 
 server: node-app node-controls node-routes
 

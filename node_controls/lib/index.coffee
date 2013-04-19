@@ -1,6 +1,22 @@
 
-exports.colors = require './colors'
-exports.parser = require './parser'
-exports.validator = require './validator'
-exports.net = require './net'
-exports.fb = require './fb'
+
+exports.colors = () ->
+
+	colors = require 'colors'
+	
+	setColorTheme = (colors) ->
+		colors.setTheme
+			silly: 'rainbow'
+			input: 'grey'
+			verbose: 'cyan'
+			prompt: 'grey'
+			info: 'green'
+			data: 'grey'
+			help: 'cyan'
+			warn: 'yellow'
+			debug: 'blue'
+			error: 'red'
+
+	setColorTheme colors
+
+	colors
